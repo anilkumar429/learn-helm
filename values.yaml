@@ -2,15 +2,15 @@ name: sample1
 
 number: 10
 
-x1: 10
-y1: 20
-
-drink: coffee
-
-favorite:
-  drink: "coffee"
-  food: "PIZZA"
-
-fruits:
-  - apple
-  - banana
+#x1: 10
+#y1: 20
+#
+#drink: coffee
+#
+#favorite:
+#  drink: "coffee"
+#  food: "PIZZA"
+#
+#fruits:
+#  - apple
+#  - banana
