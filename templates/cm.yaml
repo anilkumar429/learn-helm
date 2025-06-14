@@ -4,13 +4,49 @@ metadata:
   name: {{ .Release.Name }}
 data:
   test: test123
-  name: "{{ .Files.Get "files/new.txt" }}"
+  name: {{ .Files.Get "files/new.txt" }}
   index: "{{ index .Files "files/new.txt" | toString  | repeat 5 }}"
   bytes: "{{ .Files.GetBytes "files/new.txt" }}"
-  template_name: "{{ .Template.Name }}"
-  template_path: "{{ .Template.BasePath }}"
-  number: { { quote .Values.number } }
-  number1: { { .Values.number | quote } }
+  template_name: {{ .Template.Name }}
+  template_path: {{ .Template.BasePath }}
+  number: {{ quote .Values.number }}
+  number1: {{ .Values.number | quote }}
   number2: "{{ .Values.number }}"
-  equal: "{ { eq .Values.x1 .Values.x2 } }"
-  files: "{ { .Files.Glob "files/*.txt" } }"
+  equal: {{ eq .Values.x1 .Values.x2 }}
+  files: {{ .Files.Glob "files/*.txt" }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-1
+data:
+  {{- if eq .Values.drink "coffee" }}
+mug: "true"
+  {{- end -}}
+  {{- if eq .Values.drink "coffee" }}
+mug1: "true"
+  {{- end}}
+myvalue: "Hello World"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- with .Values.favorite }}
+  drink: {{ .drink | default "tea" | quote }}
+  food: {{ .food | upper | quote }}
+  {{- end }}
+  fruits: |
+    {{- range .Values.fruits }}
+    {{ . | title | quote }}
+    {{- end }}
+  files:
+    {{- range $k, $v := .Files.Glob "files/*.txt" }}
+      {{ $k }}
+      --------
+      {{ $v | toString }}
+      {{- end }}
