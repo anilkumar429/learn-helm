@@ -7,8 +7,8 @@ data:
   name: {{ .Files.Get "files/new.txt" }}
   index: "{{ index .Files "files/new.txt" | toString  | repeat 5 }}"
   bytes: "{{ .Files.GetBytes "files/new.txt" }}"
-  template_name: {{ .Template.Name }}
-  template_path: {{ .Template.BasePath }}
+  template_name: "{{ .Template.Name }}"
+  template_path: "{{ .Template.BasePath }}"
   number: {{ quote .Values.number }}
   number1: {{ .Values.number | quote }}
   number2: "{{ .Values.number }}"
