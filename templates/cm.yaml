@@ -10,7 +10,7 @@ data:
   template_name: "{{ .Template.Name }}"
   template_path: "{{ .Template.BasePath }}"
   number: { { quote .Values.number } }
-#  number1: { { .Values.number | quote } }
-#  number2: "{{ .Values.number }}"
+  number1: { { .Values.number | quote } }
+  number2: "{{ .Values.number }}"
 #  equal: "{ { eq .Values.x1 .Values.x2 } }"
 #  files: "{ { .Files.Glob "files/*.txt" } }"
